@@ -1,0 +1,321 @@
+{
+	"info": {
+		"_postman_id": "077a3a08-6209-4866-9af7-08b19fedc38e",
+		"name": "CURSO_PM EVA4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16122305",
+		"_collection_link": "https://grey-sunset-464453.postman.co/workspace/Curso-Postman-NTTData~1cf59f3d-cefd-41a0-84d5-d160e513951f/collection/16122305-077a3a08-6209-4866-9af7-08b19fedc38e?action=share&creator=16122305&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "bot eva 4 IVR",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearer_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "API-KEY",
+						"value": "{{API-KEY}}",
+						"type": "text"
+					},
+					{
+						"key": "CHANNEL",
+						"value": "webChat",
+						"type": "text"
+					},
+					{
+						"key": "USER-REF",
+						"value": "test",
+						"type": "text"
+					},
+					{
+						"key": "LOCALE",
+						"value": "es-ES",
+						"type": "text"
+					},
+					{
+						"key": "OS",
+						"value": "Windows",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"bus\",\r\n    \"code\": \"\",\r\n    \"context\": {\r\n        \"openContext\": [\r\n            {\"userid\": \"315222\"}\r\n        ],\r\n        \"visibleContext\": {\r\n            \"userid\": \"315222\"\r\n        },\r\n        \"hiddenContext\": {\r\n            \"document\": {\r\n                \"doc\": \"PRUEBA\",\r\n                \"typeDoc\": 4\r\n            },\r\n            \"userid\": \"315222\",\r\n            \"lastname\": \"albarran\",\r\n            \"idPermiso\": 526502,\r\n            \"permisos\": [\r\n                {\r\n                    \"matricula\": \"9547HNJ\",\r\n                    \"fechaPermiso\": \"2022-10-16\",\r\n                    \"fechaVigencia\": \"2022-10-16\"\r\n                },\r\n                {\r\n                    \"matricula\": \"8403GNX\",\r\n                    \"fechaPermiso\": \"2022-10-17\",\r\n                    \"fechaVigencia\": \"2022-10-17\"\r\n                },\r\n                {\r\n                    \"matricula\": \"8759LCK\",\r\n                    \"fechaPermiso\": \"2022-10-18\",\r\n                    \"fechaVigencia\": \"2022-10-18\"\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-{{EVA_ENV}}.eva.bot/eva-broker/org/{{ORG-UUID}}/env/{{ENV-UUID}}/bot/{{BOT-UUID}}/conversations/",
+					"protocol": "https",
+					"host": [
+						"api-{{EVA_ENV}}",
+						"eva",
+						"bot"
+					],
+					"path": [
+						"eva-broker",
+						"org",
+						"{{ORG-UUID}}",
+						"env",
+						"{{ENV-UUID}}",
+						"bot",
+						"{{BOT-UUID}}",
+						"conversations",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create token Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var body = JSON.parse(responseBody);",
+							"pm.globals.set(\"bearer_token\", body.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{CLIENT_NAME}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{CLIENT_SECRET}}",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "{{REFRESH_TOKEN}}",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://keycloak-europe-admin.eva.bot/auth/realms/{{ORG-NAME}}/protocol/openid-connect/token",
+					"protocol": "https",
+					"host": [
+						"keycloak-europe-admin",
+						"eva",
+						"bot"
+					],
+					"path": [
+						"auth",
+						"realms",
+						"{{ORG-NAME}}",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create token 200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{CLIENT_NAME}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{CLIENT_SECRET}}",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "{{REFRESH_TOKEN}}",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://keycloak-europe-admin.eva.bot/auth/realms/{{ORG-NAME}}/protocol/openid-connect/token",
+							"protocol": "https",
+							"host": [
+								"keycloak-europe-admin",
+								"eva",
+								"bot"
+							],
+							"path": [
+								"auth",
+								"realms",
+								"{{ORG-NAME}}",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "access-control-allow-origin",
+							"value": "*"
+						},
+						{
+							"key": "content-security-policy",
+							"value": "frame-ancestors none;"
+						},
+						{
+							"key": "cross-origin-embedder-policy",
+							"value": "require-corp"
+						},
+						{
+							"key": "cross-origin-opener-policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "cross-origin-resource-policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "x-dns-prefetch-control",
+							"value": "off"
+						},
+						{
+							"key": "x-frame-options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "strict-transport-security",
+							"value": "max-age=31536000; includeSubDomains"
+						},
+						{
+							"key": "x-download-options",
+							"value": "noopen"
+						},
+						{
+							"key": "x-content-type-options",
+							"value": "nosniff"
+						},
+						{
+							"key": "origin-agent-cluster",
+							"value": "?1"
+						},
+						{
+							"key": "x-permitted-cross-domain-policies",
+							"value": "none"
+						},
+						{
+							"key": "referrer-policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "x-xss-protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "cache-control",
+							"value": "no-store"
+						},
+						{
+							"key": "set-cookie",
+							"value": "KC_RESTART=; Version=1; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Max-Age=0; Path=/auth/realms/AYTO-MADRID/; Secure; HttpOnly"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "date",
+							"value": "Tue, 09 May 2023 15:47:13 GMT"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "content-length",
+							"value": "2403"
+						},
+						{
+							"key": "permissions-policy",
+							"value": "camera=();microphone=();geolocation=();encrypted-media=();payment=();speaker=();usb=();"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"963-QhgVeo7FaGLn3OPXJo6eo8sRvTs\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 google"
+						},
+						{
+							"key": "Alt-Svc",
+							"value": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJDUjVfN1JSTUxHOWF1bE1XRG1hY3BmcVNIbXJSbTd2U1dWQ0NwZkV2V3k0In0.eyJleHAiOjE2ODM2NDgxMzMsImlhdCI6MTY4MzY0NzIzMywianRpIjoiMDZmMzU4ODQtMDZiMy00MjBjLThhZDgtOTcwZGIwYjVlY2YyIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1ldXJvcGUtYWRtaW4uZXZhLmJvdC9hdXRoL3JlYWxtcy9BWVRPLU1BRFJJRCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJmMjEwNTJkOS1lOTYzLTQ4YzItYjViZC00YmM3MWQyNzJjYTIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJheXRvLW1hZHJpZCIsInNlc3Npb25fc3RhdGUiOiJhMDFjMDUxMy1kNmIxLTQyZjYtYTdmMS1iMGY4MDA2ODUzNTYiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtYXl0by1tYWRyaWQiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYXl0by1tYWRyaWQiOnsicm9sZXMiOlsidW1hX3Byb3RlY3Rpb24iXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImEwMWMwNTEzLWQ2YjEtNDJmNi1hN2YxLWIwZjgwMDY4NTM1NiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SWQiOiJheXRvLW1hZHJpZCIsImNsaWVudEhvc3QiOiIxMzkuNDcuNzMuMTM4IiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWF5dG8tbWFkcmlkIiwiY2xpZW50QWRkcmVzcyI6IjEzOS40Ny43My4xMzgifQ.FQD46yc9n8gY5kemtWBbG5jl30gWzkSPfBnkw5pCB1WdOZNB_XCSa4iki_unMOYgpgyip1Q2GrfxC6wABgZqCO_qpQEYYwowMkPmUGHt7FAWjF7oHWxOH38T81CdgEaX-qoGjIttzxy91JNEHFU8eb0zmG8a34umKPhhV9v_sclSidAjYHmy5jAYi1lwqb28-XoD6eqF5cXDnHgPFRLsTKt_3pzvYrerzG73LcAeAsJ_hjPvWURmMUda-2dZyRd5FqycOvG0HpAxRUkiESUMs6kwTN3VZJIe3S06lBFQOFVWeyDqTGjasCxCm80X2jr3EeJKp-XNcOtltUnyfHPrCQ\",\n    \"expires_in\": 900,\n    \"refresh_expires_in\": 1500,\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJlN2Q4MmIzNi0wZTFjLTRiOTgtYmZiNi1jOGM4NzYxZmQwOTEifQ.eyJleHAiOjE2ODM2NDg3MzMsImlhdCI6MTY4MzY0NzIzMywianRpIjoiMGQ2YzMwMDUtNTM3Mi00YmViLTg5MzktY2M2ZmZjZWNmNTQ1IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1ldXJvcGUtYWRtaW4uZXZhLmJvdC9hdXRoL3JlYWxtcy9BWVRPLU1BRFJJRCIsImF1ZCI6Imh0dHBzOi8va2V5Y2xvYWstZXVyb3BlLWFkbWluLmV2YS5ib3QvYXV0aC9yZWFsbXMvQVlUTy1NQURSSUQiLCJzdWIiOiJmMjEwNTJkOS1lOTYzLTQ4YzItYjViZC00YmM3MWQyNzJjYTIiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoiYXl0by1tYWRyaWQiLCJzZXNzaW9uX3N0YXRlIjoiYTAxYzA1MTMtZDZiMS00MmY2LWE3ZjEtYjBmODAwNjg1MzU2Iiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiYTAxYzA1MTMtZDZiMS00MmY2LWE3ZjEtYjBmODAwNjg1MzU2In0.HZ2-TMvwCTH8e1dyTFdlZvzBZ2Nd89qbUb_fTTAiV_M\",\n    \"token_type\": \"Bearer\",\n    \"not-before-policy\": 0,\n    \"session_state\": \"a01c0513-d6b1-42f6-a7f1-b0f800685356\",\n    \"scope\": \"profile email\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
